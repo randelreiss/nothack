@@ -1,0 +1,82 @@
+(Actually, since I didn't read the message asking us to keep logs, about half of
+this is probably being backfilled.  It's 6:30 on Saturday right now) 
+
+Friday, 9pm:
+  Topic announced; I had ideas for some of the others but hadn't even known that
+  Guardian was an option.  Throws me for a bit, so I decide to focus on building
+  a basic engine while I think of what I'm going to do with it.  I'd already
+  decided on PyGame, mainly because I knew python and wanted to know pygame, so
+  I spent most of the night brainstorming and learning pygame.  I've got some
+  SDL background so it's not too painful.
+
+-- SATURDAY --
+  
+Saturday, 7am:
+  I wake up and go to work; since I'm trying to gain extra hours, there's no
+  luxurious weekend of coding for me! I do manage to come up with my idea during
+  lunch, however:  Every RPG out there always has the hero defeating the
+  Guardian of something at some point in order to get that something.  Well, I
+  figure, why not write a game where you /are/ that guardian?  Since I'm on a
+  major Nethack kick lately, I figure that's a decent enough setting:  You're
+  the guardian at the bottom of the dungeon and it's your job to kick all the
+  advenurer wannabes who try to get the item you're protecting (which I haven't
+  decided upon yet).
+  
+Saturday, 2pm:
+  Work ends, and I go home and code.  I put together some extraordinarily
+  terrible graphics for tiles and create a title screen.  It's a snapshot of me
+  playing Nethack, a big X over it, and the title:  "Not Hack".
+ 
+Saturday, 6:30pm:
+  Tile engine works.  Now I just have to put some sprites on it and have it
+  scroll.  Take a break for dinner and to see what all the other screenshots are
+  like.  See the announcement about the logs.  Start writing this.
+  
+Saturday, 6:38pm:
+  Done writing this.  Getting back to work :)
+  
+Saturday, 8:15pm:
+  The IRC channel is very distracting.  My screenshot in the title is okay, it
+  turns out, so long as I'm not ripping off Nethack /too/ badly.  I think I'm
+  okay :)
+  Can scroll the tile engine around now.  Just finished an adventurer image;
+  next up is the player himself.  This ought to be good.
+  
+Saturday, 9:30pm:
+  The IRC channel is still very distracting.  Adventurer image looks like a
+  dork, but the player image that looked dorky at 1600% actually looks pretty
+  good at 32x32. Tile engine is now centered on the player, and you can't walk
+  through walls anymore.
+  
+Saturday, 11:30pm:
+  Backend engine work.  Characters have stats now, about to put in weaponry and
+  armor and such.  Made the wall tiles look far better.  Put up a HUD for the
+  player's stats.  Came up with names for the dungeon you're in:
+  
+  The Mazes of Mania, the Caverns of Chaos, the Tunnels of Terror, 
+  the Subterranian Sanctum of Sin, the Aerie of Abomination, the 
+  Dark Dwellings of Death, the Hellish Hallways of Horror
+
+Saturday, 12:13pm:
+  Made a background to blend with the top of the walls.  Started implementing
+  weaponry and items in general.  Added a message log to the top of the screen
+  that randomly picks from the above names.  Went to bed :)
+  
+-- SUNDAY --
+  
+Sunday, 11:30am:
+  I didn't actually sleep until just now; I woke up a few hours ago but showered
+  and ate and such.  Pretty much did all the relaxing I'm likely to do today. 
+  Started up coding again.
+  
+Sunday, 2:40pm:
+  Dropping and picking up of items implemented.  Equipping and de-equipping
+  implemented.  Inventory management in general implemented.  Next up:  The
+  Enemies.
+  
+Sunday, 4:30pm:
+  Implemented A* for the first time ever.  The earth moved.
+  
+Sunday, 6:01pm:
+  Clock ticking down really fast today.  Got messages and entrances done; time
+  to hook up some AI
