@@ -20,15 +20,15 @@ class Menu(State):
 
     def event(self, key, pressed):
         if pressed:
-            if key == K_KP8:
+            if key == K_KP8 or key == K_UP:
                 self._current -= 1
                 if self._current < 0:
                     self._current = len(self._options) - 1
-            elif key == K_KP2:
+            elif key == K_KP2 or key == K_DOWN:
                 self._current += 1
                 if self._current >= len(self._options):
                     self._current = 0
-            elif key == K_KP_ENTER:
+            elif key == K_KP_ENTER or key == K_RETURN:
                 self._driver.done()
             elif key == K_ESCAPE:
                 self._chosen = (None, None, None)
