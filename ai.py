@@ -3,6 +3,8 @@ import entities
 import inventory
 from tileengine import TileEngine
 
+class BreakIt(Exception): pass
+
 class Node:
     def __init__(self, tileMap, location, parent, searchedlist,
                  depth):
@@ -120,8 +122,8 @@ class Adventurer(entities.Character):
                             nextY == routeY):
                             if(self.move(dx, dy)):
                                 self.route.pop(0)
-                                raise 'done'
-            except 'done':
+                                raise BreakIt
+            except BreakIt:
                 pass
 
         if not self.hasStaff:
