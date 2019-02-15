@@ -95,13 +95,13 @@ class PlayingGame(State):
     def event(self, key, pressed):
         turned = 1
         if pressed:
-            if key == K_KP8:
+            if key == K_KP8 or key == K_UP:
                 self._player.move(0, -1)
-            elif key == K_KP2:
+            elif key == K_KP2 or key == K_DOWN:
                 self._player.move(0, 1)
-            elif key == K_KP4:
+            elif key == K_KP4 or key == K_LEFT:
                 self._player.move(-1, 0)
-            elif key == K_KP6:
+            elif key == K_KP6 or key == K_RIGHT:
                 self._player.move(1, 0)
             elif key == K_KP1:
                 self._player.move(-1, 1)
