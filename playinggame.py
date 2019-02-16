@@ -194,9 +194,9 @@ class PlayingGame(State):
         
     def paintStats(self,screen, player):
         statsTuple = (player.str, player.dex, player.int, player.hp,
-                      player.maxhp, player.mp, player.maxmp)
+                      player.maxhp, player.mp, player.maxmp, player.money)
         line =("The Guardian (level %d):  "% player.level +
-          "STR %d DEX %d INT %d  HP %d(%d) MP %d(%d)") % statsTuple
+          "STR %d DEX %d INT %d  HP %d(%d) MP %d(%d)  Gold %d") % statsTuple
 
         white = (255, 255, 255)
         stats = self._font.render(line, 0, white).convert()
