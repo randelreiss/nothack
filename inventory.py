@@ -117,7 +117,8 @@ class Use(InventoryAction):
     def menu(self):
         itemMenu = []
         for item in self._player.inventory:
-            itemMenu.append( (item, item.getName(), None))
+            if item.getType() not in entities.EQUIPPABLE:
+                itemMenu.append( (item, item.getName(), None))
         itemMenu.append( (None, "On second thought, let's not.",
                           None))
         self._menu = Menu(self._driver, (5, 5), itemMenu,
