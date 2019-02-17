@@ -128,6 +128,9 @@ class PlayingGame(State):
             elif key == K_a:
                 self._visited = inventory.Use(self._driver,
                                               self._player, self)
+            elif key == K_h:
+                self._visited = inventory.Help(self._driver,
+                                              self._player, self)
 
             elif key == K_b:
                 if self._player.money > 250:
