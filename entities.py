@@ -260,6 +260,7 @@ class Potion(Item):
                                      self._healingMax))
 
         character.heal(amount)
+        character.inventory.remove(self)
         character.message("You are healed for %d points" % amount)
 
 class Entry(TileSprite):
