@@ -17,7 +17,10 @@ def main():
 
     if '-fs' in sys.argv or '--fullscreen' in sys.argv:
         fs = FULLSCREEN
-    
+
+    print("NotHack by Roger 'Denor' Ostrander, 2019 version by Randel@RandelReiss.com")
+    print("Hit the H Key for Help screen...")
+
     screen = pygame.display.set_mode(screensize, DOUBLEBUF | fs)
 
     driver = states.StateDriver(screen)
