@@ -141,3 +141,21 @@ class GameOver(InventoryAction):
         self._menu = Menu(self._driver, (100, 100), menu,
                                          self._message)
         self._driver.start(self._menu)
+
+
+class Help(InventoryAction):
+    def __init__(self, driver, player, pgs):
+        InventoryAction.__init__(self, driver, player, pgs)
+
+    def menu(self):
+        helpMenu = [ (None, 'Use the Arrow Keys to move your Guardian.', None),
+                     (None, 'Hit the e Key to Equip an item.', None),
+                     (None, 'Hit the b Key to Buy a potion.', None),
+                     (None, 'Hit the a Key to Apply a potion.', None),
+                     (None, 'Hit the s Key to Sell an item.', None),
+                     (None, 'Hit the u Key to UnEquip an item.', None),
+                     (None, 'Hit the d Key to Drop an item.', None),
+                     (None, 'Hit the Esc Key to Quit the game.', None) ]
+        self._menu = Menu(self._driver, (100, 100), helpMenu,
+                          "Hit the Enter Key to return to the game.")
+        self._driver.start(self._menu)
