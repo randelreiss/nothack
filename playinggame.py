@@ -113,6 +113,9 @@ class PlayingGame(State):
                 counter = 0
 
         self._turn = 0
+        mixer.music.load(localSoundsDir + '23 - Cold_Mountain_Clouds.ogg')
+        mixer.music.set_volume(localVol * 4)
+        mixer.music.play(-1)
 
     def event(self, key, pressed):
         soundOpenMenu.set_volume(localVol * .5)
