@@ -1,5 +1,24 @@
+import common
 import random
+from common import *
 from tileengine import TileSprite
+
+try:
+	import pygame.mixer as mixer
+except ImportError:
+	import android.mixer as mixer
+
+mixer.init(44100, -16, 2, 2048)
+localVol = common.globalVolume
+
+# sound files
+localSoundsDir = common.soundsDirectory
+soundFight = mixer.Sound(soundsDirectory+'Hit_LargeAxeImpactStone1.ogg')
+soundHumanDie = mixer.Sound(soundsDirectory+'Male_LS_B_Death02.ogg')
+soundItemPickup = mixer.Sound(soundsDirectory+'Pickup_Armour_FlakVest2.ogg')
+soundPlayerDeath = mixer.Sound(soundsDirectory+'fatmonster_deathroar2.ogg')
+soundGameOver = mixer.Sound(soundsDirectory+'magic_spell_cloak04.ogg')
+soundStaffTaken = mixer.Sound(soundsDirectory+'magic_crystalenergyshot3.ogg')
 
 EQUIPPABLE = ['weapon', 'armor']
 
@@ -108,11 +127,13 @@ class Character(TileSprite):
             if(self.damage(dmg)):
                 self.message("You die...")
                 other.message("The Adventurer dies!")
+                soundHumanDie.set_volume(localVol * 1)
+                soundHumanDie.play()
         else:
             self.message("The Adventurer Misses!")
             other.message("You miss!")
             return 0
-                          
+
     def levelUp(self):
         self.maxhp += self.str / 4 + random.random() * 5
         self.maxmp += self.int / 4 + random.random() * 5
@@ -245,7 +266,7 @@ class Staff(Item):
             character.message(msg)
             return 0
         return 1
-    
+
     def getType(self):
         return 'staff'
 

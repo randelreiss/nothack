@@ -1,12 +1,34 @@
+import common
 import pygame
 import random
 import inventory
 import entities
 import ai
+from common import *
 from pygame.constants import *
 from states import State
 from tileengine import TileEngine, TileSprite
 from entities import Character
+
+try:
+	import pygame.mixer as mixer
+	android = False
+except ImportError:
+	import android.mixer as mixer
+	android = True
+
+mixer.init(44100, -16, 2, 2048)
+localVol = common.globalVolume
+
+# sound files
+localSoundsDir = common.soundsDirectory
+soundOpenMenu = mixer.Sound(localSoundsDir + 'door_mysticalopen1.ogg')
+soundStartUp = mixer.Sound(localSoundsDir + 'Magic_Appear01.ogg')
+soundEnemySpawn = mixer.Sound(localSoundsDir + 'Menu_Cancel01.ogg')
+soundCoins = mixer.Sound(localSoundsDir + 'Pickup_Coins01.ogg')
+# play start up sound
+soundStartUp.set_volume(localVol * 1)
+soundStartUp.play()
 
 names = [
     'The Mazes of Mania',
@@ -63,7 +85,7 @@ class PlayingGame(State):
         self._player.equip(weapon)
         self._player.giveItem(armor)
         self._player.equip(armor)
-                                              
+
         self._engine.addSprite(self._player)
         self._engine.centerOn(self._player)
 
@@ -89,10 +111,11 @@ class PlayingGame(State):
                 counter += 1
             except KeyError:
                 counter = 0
-        
+
         self._turn = 0
 
     def event(self, key, pressed):
+        soundOpenMenu.set_volume(localVol * .5)
         turned = 1
         if pressed:
             if key == K_KP8 or key == K_UP:
@@ -144,12 +167,14 @@ class PlayingGame(State):
                     potion = entities.Potion('armor.png',
                                              self._engine, 0, 0,
                                              potionStats)
-                    
+
                     self._player.giveItem(potion)
-                
+                    soundCoins.set_volume(localVol * 1)
+                    soundCoins.play()
+
             elif key == K_ESCAPE:
                 self._driver.done()
-                
+
             self._engine.centerOn(self._player)
             if turned:
                 self.takeTurn()
@@ -159,7 +184,7 @@ class PlayingGame(State):
             self._messages.append( (self._turn, message) )
         except AttributeError:
             pass # Don't message until self._turn is ready
-            
+
     def paint(self, screen):
         self._engine.paint(screen)
 
@@ -183,10 +208,10 @@ class PlayingGame(State):
             pygame.draw.line(screen, white, (x,y), (right, y))
             pygame.draw.line(screen, white, (right,y),
                              (right, bottom))
-            
+
             pygame.draw.line(screen, white, (right,bottom),
                              (x, bottom))
-        
+
             pygame.draw.line(screen, white, (x,bottom),
                              (x,y))
             screen.fill( (64, 64, 192),
@@ -194,7 +219,7 @@ class PlayingGame(State):
             for image in messageImages:
                 screen.blit(image, (x+1, y+1))
                 y += image.get_size()[1] + 2
-        
+
     def paintStats(self,screen, player):
         statsTuple = (player.str, player.dex, player.int, player.hp,
                       player.maxhp, player.mp, player.maxmp, player.money)
@@ -227,8 +252,11 @@ class PlayingGame(State):
             message = "You sense an intruder enter the dungeon"
             self.message(message)
             self._engine.addSprite(adv, 1)
+
+            soundEnemySpawn.set_volume(localVol * 1)
+            soundEnemySpawn.play()
         self._engine.takeTurn()
-        
+
 
     def update(self):
         if(self._visited):
