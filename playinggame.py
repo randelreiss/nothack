@@ -52,12 +52,16 @@ class PlayingGame(State):
         self._visited = None
         mapinfo = self._engine.getMapInfo()
         self._mapinfo = mapinfo
+        self.xp = localXP = 3500
         playerStats = {
-            'level' : 35,
+            'level' : localXP / 100,
             'str' : 30,
             'dex' : 30,
             'int' : 30,
         }
+        self.gender = 'Male'
+        self.race = 'Human'
+        self.charClass = 'Guardian'
         armorStats = {
             'name'    : '+10 Robes of the Guardian',
             'absorb'  : 20,
@@ -161,7 +165,7 @@ class PlayingGame(State):
             elif key == K_b:
                 if self._player.money > 250:
                     self._player.money -= 250
-                    self.message("You buy a healing potion for 250")
+                    self.message("You buy a Healing Potion for 250 Gold")
                     potionStats = {
                         'name' : "Healing Potion",
                         'healingMin' : 25,
@@ -174,6 +178,8 @@ class PlayingGame(State):
                     self._player.giveItem(potion)
                     soundCoins.set_volume(localVol * 1)
                     soundCoins.play()
+                else:
+					self.message("You don't have enough Gold to buy a Healing Potion")
 
             elif key == K_ESCAPE:
                 self._driver.done()
@@ -225,9 +231,10 @@ class PlayingGame(State):
 
     def paintStats(self,screen, player):
         statsTuple = (player.str, player.dex, player.int, player.hp,
-                      player.maxhp, player.mp, player.maxmp, player.money)
-        line =("The Guardian (level %d):  "% player.level +
-          "STR %d DEX %d INT %d  HP %d(%d) MP %d(%d)  Gold %d") % statsTuple
+                      player.maxhp, player.mp, player.maxmp, player.money,
+					  player.xp)
+        line =("The Guardian (Level %d):  "% player.level +
+          "STR %d DEX %d INT %d  HP %d(%d) MP %d(%d)  Gold %d  XP %d") % statsTuple
 
         white = (255, 255, 255)
         stats = self._font.render(line, 0, white).convert()

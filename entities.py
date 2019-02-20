@@ -29,9 +29,13 @@ class Character(TileSprite):
         self._parent = parent
         self.money = 0
         self.level = stats['level']
+        self.gender = 'Male'
+        self.race = 'Human'
+        self.charClass = 'Fighter'
         self.str = stats['str']
         self.dex = stats['dex']
         self.int = stats['int']
+        self.xp = 0
         self.inventory = []
         self.equipped = {
             'weapon' : None,
@@ -126,7 +130,10 @@ class Character(TileSprite):
             other.message("You hit for %d damage!" % dmg)
             if(self.damage(dmg)):
                 self.message("You die...")
-                other.message("The Adventurer dies!")
+                #other.message("The Adventurer dies!")
+                localStats = (self.level, self.gender,
+                              self.race, self.charClass)
+                other.message("A Level %d %s %s %s Adventurer dies!" % localStats)
                 soundHumanDie.set_volume(localVol * 1)
                 soundHumanDie.play()
         else:

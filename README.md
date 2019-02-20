@@ -1,6 +1,5 @@
 # nothack
 Inverse of the typical RPG - you are the Guardian.
-Verified with Python 2.7.12 with PyGame.
 
 Your system may require the command from within the nothack directory:
   > python ./nothack

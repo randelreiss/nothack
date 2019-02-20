@@ -31,7 +31,7 @@ class Node:
         self.searched.append( (nextX, nextY) )
         return Node( self.map, (nextX, nextY), self,
                      self.searched, self.depth+1)
-    
+
     def estCost(self, goal):
         dx = self.x - goal[0]
         dy = self.y - goal[1]
@@ -52,7 +52,7 @@ class Node:
                 if not self.map[nextY][nextX] in TileEngine.passable:
                     continue
                 if (nextX, nextY) in self.searched:
-                    continue 
+                    continue
                 children.append(self.createChild(nextX, nextY))
         return children
 
@@ -60,7 +60,7 @@ class Node:
         if (self.x == goal[0] and
             self.y == goal[1]): return 1
         return 0
-        
+
 def getPath(tileMap, startLocation, endLocation):
     searched = [ startLocation ]
     nodes = [ Node(tileMap, startLocation, None, searched, 0) ]
@@ -144,6 +144,21 @@ class Adventurer(entities.Character):
 def createAdventurer(entrances, engine):
     chosen = random.choice(entrances)
 
+    gender = [
+        'Male', 'Male', 'Male',
+        'Male', 'Male',
+        'Female', 'Female',
+        'Female' ]
+    race = [
+        'Human', 'Human', 'Human',
+        'Elf', 'Elf',
+        'Dwarf', 'Dwarf',
+        'Halfling' ]
+    charClass = [
+        'Fighter', 'Fighter', 'Fighter',
+        'Warrior', 'Warrior',
+        'Rogue', 'Theif',
+        'Wizard' ]
     weapons = [
         '+%d Bastard Sword', '+%d Long Sword', '+%d Short Sword',
         '+%d Steel Dagger', '+%d Daedric Long Sword',
@@ -167,8 +182,9 @@ def createAdventurer(entrances, engine):
         'absorb' : 10 + armorPlus,
         'toDodge' : 10 + armorPlus,
         }
+    localXP = int(random.uniform(20, 30)) * 100
     randomStats = {
-        'level' : int(random.uniform(20, 30)),
+        'level' : localXP / 100,
         'str' : int(random.uniform(10, 20)),
         'dex' : int(random.uniform(10, 20)),
         'int' : int(random.uniform(10, 20)),
@@ -176,6 +192,9 @@ def createAdventurer(entrances, engine):
     x = chosen.getXY()[0]
     y = chosen.getXY()[1]
     adventurer = Adventurer('adventurer.png', engine, x, y, randomStats)
+    adventurer.gender = random.choice(gender)
+    adventurer.race = random.choice(race)
+    adventurer.charClass = random.choice(charClass)
     weapon = entities.Weapon('sword.png', engine, 0, 0, weaponStats)
     armor = entities.Armor('armor.png', engine, 0, 0, armorStats)
     adventurer.giveItem(weapon)
@@ -183,4 +202,3 @@ def createAdventurer(entrances, engine):
     adventurer.equip(weapon)
     adventurer.equip(armor)
     return adventurer
-
