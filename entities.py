@@ -52,6 +52,11 @@ class Character(TileSprite):
         self.hp -= amount
         if self.hp <= 0:
             self._parent.dead(self)
+            if not self.isPlayer:
+                localPlayer = self._parent.getPlayer()
+                # As Player level, earns gradually less percentage of slain XP
+                xpMod = 100 - localPlayer.level
+                localPlayer.xp += int((float(xpMod) / 100) * self.xp)
             return 1
         return 0
 

@@ -192,6 +192,7 @@ def createAdventurer(entrances, engine):
     x = chosen.getXY()[0]
     y = chosen.getXY()[1]
     adventurer = Adventurer('adventurer.png', engine, x, y, randomStats)
+    adventurer.xp = localXP
     adventurer.gender = random.choice(gender)
     adventurer.race = random.choice(race)
     adventurer.charClass = random.choice(charClass)
