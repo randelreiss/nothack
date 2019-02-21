@@ -17,8 +17,9 @@ soundFight = mixer.Sound(soundsDirectory+'Hit_LargeAxeImpactStone1.ogg')
 soundHumanDie = mixer.Sound(soundsDirectory+'Male_LS_B_Death02.ogg')
 soundItemPickup = mixer.Sound(soundsDirectory+'Pickup_Armour_FlakVest2.ogg')
 soundPlayerDeath = mixer.Sound(soundsDirectory+'fatmonster_deathroar2.ogg')
-soundGameOver = mixer.Sound(soundsDirectory+'magic_spell_cloak04.ogg')
+soundApplyPotion = mixer.Sound(soundsDirectory+'magic_spell_cloak04.ogg')
 soundStaffTaken = mixer.Sound(soundsDirectory+'magic_crystalenergyshot3.ogg')
+soundGainLevel = mixer.Sound(soundsDirectory+'magic_spellimpact22.ogg')
 
 EQUIPPABLE = ['weapon', 'armor']
 
@@ -147,10 +148,15 @@ class Character(TileSprite):
             return 0
 
     def levelUp(self):
+		#self.level =+ 1
         self.maxhp += self.str / 4 + random.random() * 5
         self.maxmp += self.int / 4 + random.random() * 5
         self.hp = self.maxhp
         self.mp = self.maxmp
+        if self.isPlayer:
+			self.message("Congratulations, you've gained a Level!")
+			soundGainLevel.set_volume(localVol * .5)
+			soundGainLevel.play()
 
     def message(self, msg):
         if self.isPlayer:
@@ -195,7 +201,7 @@ class Item(TileSprite):
         return 1
 
     def price(self):
-        return int(random.uniform(50, 5000))
+        return int(random.uniform(50, 500))
 
     def deequip(self, character):
         return 1
@@ -217,6 +223,8 @@ class Item(TileSprite):
     def occupied(self, character):
         if(character.giveItem(self)):
             character.message("You pick up the %s" % self.getName())
+            soundItemPickup.set_volume(localVol * .5)
+            soundItemPickup.play()
             return 1
         else:
             character.message("You cannot have the %s" % self.getName())
@@ -295,6 +303,8 @@ class Potion(Item):
         character.heal(amount)
         character.inventory.remove(self)
         character.message("You are healed for %d points" % amount)
+        soundApplyPotion.set_volume(localVol * 1)
+        soundApplyPotion.play()
 
 class Entry(TileSprite):
     def __init__(self, imageFilename, parent, x, y):
