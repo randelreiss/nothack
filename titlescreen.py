@@ -25,7 +25,7 @@ class TitleScreen(State):
           self._menu = None
           self._driver.done()
       else:
-          print result
+          print (result)
     else:
       self._driver.done()
 

@@ -179,7 +179,7 @@ class PlayingGame(State):
                     soundCoins.set_volume(localVol * 1)
                     soundCoins.play()
                 else:
-					self.message("You don't have enough Gold to buy a Healing Potion")
+                    self.message("You don't have enough Gold to buy a Healing Potion")
 
             elif key == K_ESCAPE:
                 self._driver.done()
@@ -271,3 +271,4 @@ class PlayingGame(State):
     def update(self):
         if(self._visited):
             self._driver.start(self._visited)
+

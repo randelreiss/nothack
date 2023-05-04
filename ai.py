@@ -70,7 +70,7 @@ def getPath(tileMap, startLocation, endLocation):
         if node.isGoal(endLocation):
             break
         nodes.extend(node.expand())
-        nodes.sort()
+        nodes.sort(key=lambda n: n.location)  # sort by location
     path = [ node.location ]
     while(node.parent != None):
         path.append(node.parent.location)

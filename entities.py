@@ -46,7 +46,8 @@ class Character(TileSprite):
         self.toDodge = float(self.dex) / 80.0
         self.hp = self.maxhp = 0
         self.mp = self.maxmp = 0
-        for x in range(self.level):
+        new_num = int(self.level)
+        for x in range(new_num):
             self.levelUp()
 
     def damage(self, amount):
@@ -154,9 +155,9 @@ class Character(TileSprite):
         self.hp = self.maxhp
         self.mp = self.maxmp
         if self.isPlayer:
-			self.message("Congratulations, you've gained a Level!")
-			soundGainLevel.set_volume(localVol * .5)
-			soundGainLevel.play()
+            self.message("Congratulations, you've gained a Level!")
+            soundGainLevel.set_volume(localVol * .5)
+            soundGainLevel.play()
 
     def message(self, msg):
         if self.isPlayer:

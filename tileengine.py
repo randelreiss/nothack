@@ -85,7 +85,7 @@ class TileEngine:
                                                    self._player,
                                                    self._parent,
                                                    msg))
-            print "Game over!"
+            print ("Game over!")
         else:
             self.removeSprite(who)
 
