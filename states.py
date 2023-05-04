@@ -45,6 +45,7 @@ class StateDriver:
                     if event.type == KEYDOWN:
                         currentState.event(event.key, 1)
                 event = pygame.event.poll()
+
             self._screen.fill( (0, 0, 0) )
             if currentState:
                 currentState.paint(self._screen)
