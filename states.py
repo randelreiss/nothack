@@ -1,3 +1,4 @@
+import asyncio
 import pygame
 from pygame.locals import *
 
@@ -26,7 +27,7 @@ class StateDriver:
         self._states.pop()
         self.start(state)
 
-    def run(self):
+    async def run(self):
         currentState = self.getCurrentState()
         while(currentState):
             # poll queue
@@ -55,6 +56,8 @@ class StateDriver:
                 
                 pygame.display.flip()
                 pygame.time.delay(40);
+    
+            await asyncio.sleep(0) # very important, and keep it 0
 
     def start(self, state):
         self._states.append(state)
