@@ -9,7 +9,7 @@ from pygame.locals import *
 import states
 from titlescreen import TitleScreen
 
-async def main():
+def main():
     random.seed()
     pygame.init()
 
@@ -27,9 +27,10 @@ async def main():
     driver = states.StateDriver(screen)
     initial = TitleScreen(driver)
     driver.start(initial)
-    driver.run()
+    asyncio.run( driver.run() )
 
-    await asyncio.sleep(0)  # very important, and keep it 0
+    # await asyncio.sleep(0)  # very important, and keep it 0
 
 if __name__ == '__main__':
-    asyncio.run( main() )
+    main()
+    #asyncio.run( main() )
