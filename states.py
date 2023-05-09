@@ -1,4 +1,4 @@
-import asyncio
+import asyncio # for pygbag
 import pygame
 from pygame.locals import *
 
